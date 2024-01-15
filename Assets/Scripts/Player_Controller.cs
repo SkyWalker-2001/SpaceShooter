@@ -22,7 +22,7 @@ public class Player_Controller : MonoBehaviour
     {
         mainCam = Camera.main;
 
-        
+        StartCoroutine(SetBoundaries());
 
     }
 
@@ -37,10 +37,27 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
+
+        // if(Touch.activeTouches.Count > 0){
+        //     if(Touch.activeTouches[0].finger.index == 0){
+
+        //     }
+        // }
+
         if(Touch.fingers[0].isActive){
             
             Touch myTouch = Touch.activeTouches[0];
             Vector3 touchPos = myTouch.screenPosition;
+
+
+#if UNITY_EDITOR
+        
+        if(touchPos.x == Mathf.Infinity){
+            return;
+        }
+
+#endif
+
             touchPos = mainCam.ScreenToWorldPoint(touchPos);
 
             if(Touch.activeTouches[0].phase == TouchPhase.Began){
@@ -54,7 +71,6 @@ public class Player_Controller : MonoBehaviour
             }
 
             transform.position = new Vector3(Mathf.Clamp(transform.position.x,maxLeft,maxRight),Mathf.Clamp(transform.position.y, maxDown,maxUp),0);
-
         }
     }
 
