@@ -18,6 +18,10 @@ public class Win_Condition : MonoBehaviour
             for(int i = 0; i < spawner.Length; i++){
                 spawner[i].SetActive(false);
             }
+
+            End_Games_Manager.end_Games_Manager.StartResolveSequence();
+            gameObject.SetActive(false);
+            //End_Games_Manager.end_Games_Manager.ResolveGame();
         }
     }
 }

@@ -31,6 +31,8 @@ public class Player_State : MonoBehaviour
 
         if(health <= 0){
 
+            End_Games_Manager.end_Games_Manager.gameOver = true;
+            End_Games_Manager.end_Games_Manager.StartResolveSequence();
             Instantiate(Explosion_Prefab, transform.position, transform.rotation);
             Destroy(gameObject);
         }
