@@ -7,7 +7,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected float health;
     [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] protected float damage;
 
+    [SerializeField] protected GameObject explosion_Prefab;
     void Start()
     {
         
