@@ -13,6 +13,8 @@ public class Win_Condition : MonoBehaviour
     }
 
     private void Update() {
+        if (End_Games_Manager.end_Games_Manager.gameOver == true)
+            return;
         timer += Time.deltaTime;
         if(timer >= possibleWin_time){
             for(int i = 0; i < spawner.Length; i++){
