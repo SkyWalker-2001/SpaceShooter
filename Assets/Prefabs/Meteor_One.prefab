@@ -103,6 +103,8 @@ MonoBehaviour:
   rb: {fileID: 1785174886939399801}
   damage: 1
   explosion_Prefab: {fileID: 7868018423847650872, guid: f2bc9d1177a25a1408525e8c2d106965, type: 3}
+  anim: {fileID: 0}
+  score_Valuel: 10
   minSpeed: 8
   maxSpeed: 15
   rotating_Speed: 100

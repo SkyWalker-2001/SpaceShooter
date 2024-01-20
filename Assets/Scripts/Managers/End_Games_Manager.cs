@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+using TMPro;
 
 public class End_Games_Manager : MonoBehaviour
 {
     public static End_Games_Manager end_Games_Manager;
 
     private Panel_Controller panel_Controller;
+    private TextMeshProUGUI scoreTextMeshPro;
     public bool gameOver;
+
+    private int Score;
 
     private void Awake() {
 
@@ -46,6 +49,12 @@ public class End_Games_Manager : MonoBehaviour
         }
     }
 
+    public void UpdateScore(int addScore)
+    {
+        Score += addScore;
+        scoreTextMeshPro.text = "Score: " + Score.ToString();
+    }
+
     public void Win_Game(){
 
         panel_Controller.Activate_Win_Screen_Panel();
@@ -57,5 +66,10 @@ public class End_Games_Manager : MonoBehaviour
 
     public void RegisterPanelController(Panel_Controller pC){
         panel_Controller = pC;
+    }
+
+    public void Register_Score_Text(TextMeshProUGUI score_TMP)
+    {
+        scoreTextMeshPro = score_TMP;
     }
 }
