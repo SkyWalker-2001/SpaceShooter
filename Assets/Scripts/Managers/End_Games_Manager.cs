@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class End_Games_Manager : MonoBehaviour
 {
@@ -56,12 +58,25 @@ public class End_Games_Manager : MonoBehaviour
     }
 
     public void Win_Game(){
-
+        Set_Score();
         panel_Controller.Activate_Win_Screen_Panel();
     }
 
     public void Lose_Game(){
+        Set_Score();
         panel_Controller.Activate_Lose_Screen_Panel();
+    }
+
+    public void Set_Score()
+    {
+        PlayerPrefs.SetInt("Score" + SceneManager.GetActiveScene().name, Score);
+        int highScore = PlayerPrefs.GetInt("High_Score" + SceneManager.GetActiveScene().name, 0);
+
+        if(Score > highScore)
+        {
+            PlayerPrefs.SetInt("High_Score" + SceneManager.GetActiveScene().name, Score);
+        }
+        Score = 0;
     }
 
     public void RegisterPanelController(Panel_Controller pC){
