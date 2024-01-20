@@ -15,6 +15,9 @@ public class End_Games_Manager : MonoBehaviour
 
     private int Score;
 
+    [HideInInspector]
+    public string lvl_Unlock = "LevelUnlock";
+
     private void Awake() {
 
         if(end_Games_Manager == null){
@@ -60,6 +63,12 @@ public class End_Games_Manager : MonoBehaviour
     public void Win_Game(){
         Set_Score();
         panel_Controller.Activate_Win_Screen_Panel();
+
+        int next_Level = SceneManager.GetActiveScene().buildIndex + 1;
+        if (next_Level > PlayerPrefs.GetInt(lvl_Unlock, 0))
+        {
+            PlayerPrefs.SetInt(lvl_Unlock, next_Level);
+        }
     }
 
     public void Lose_Game(){
