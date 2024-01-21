@@ -108,6 +108,7 @@ MonoBehaviour:
   minSpeed: 8
   maxSpeed: 15
   rotating_Speed: 100
+  powerUp_Scriptable_Obj_Spawner: {fileID: 11400000, guid: 5c454669ded627d4e8d5045eebd7f978, type: 2}
 --- !u!50 &1785174886939399801
 Rigidbody2D:
   serializedVersion: 4
