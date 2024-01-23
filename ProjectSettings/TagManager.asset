@@ -15,8 +15,8 @@ TagManager:
   - Enemy
   - Player_Projectile
   - Enemy_Projectile
-  - 
-  - 
+  - Pick_up
+  - Shield
   - 
   - 
   - 

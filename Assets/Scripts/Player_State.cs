@@ -9,6 +9,7 @@ public class Player_State : MonoBehaviour
     [SerializeField] private Image fill_Image;
     [SerializeField] private GameObject Explosion_Prefab;
     [SerializeField] private Animator player_Animator;
+    [SerializeField] private Shield shield;
 
     private float health;
     private bool canPlaye_Anim = true;
@@ -20,6 +21,10 @@ public class Player_State : MonoBehaviour
     }
 
     public void Player_TakeDamage(float damage){
+
+        if (shield.protection)
+            return;
+
         health -= damage;
         Instantiate(Explosion_Prefab, transform.position, transform.rotation);
 
@@ -37,6 +42,14 @@ public class Player_State : MonoBehaviour
             Instantiate(Explosion_Prefab, transform.position, transform.rotation);
             Destroy(gameObject);
         }
+    }
+
+    public void Add_Health(int healAmount)
+    {
+        health += healAmount;
+        if (health > maxHealth)
+            health = maxHealth;
+        fill_Image.fillAmount = health / maxHealth;
     }
 
     private IEnumerator AntiSpamAnimation(){
