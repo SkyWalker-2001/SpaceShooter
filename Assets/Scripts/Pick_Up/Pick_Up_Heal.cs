@@ -15,4 +15,8 @@ public class Pick_Up_Heal : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

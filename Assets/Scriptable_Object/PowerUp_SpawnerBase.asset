@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnThreshold: 80
   power_Up:
-  - {fileID: 738433725002202171, guid: 07837d22d37f28649885f0cd2d421af1, type: 3}
   - {fileID: 4211347570485857854, guid: b0a9b86f88c08774fb0d7b8e2ee41913, type: 3}
+  - {fileID: 738433725002202171, guid: 07837d22d37f28649885f0cd2d421af1, type: 3}
+  - {fileID: 4041438282128035013, guid: 68598458a2aed134c97eb7f7f7f94edd, type: 3}

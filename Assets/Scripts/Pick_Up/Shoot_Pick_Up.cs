@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield_Pick_Up : MonoBehaviour
+public class Shoot_Pick_Up : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Player_Shield_Activator player_Shield_Activator = collision.GetComponent<Player_Shield_Activator>();
-            player_Shield_Activator.Active_Shield();
+            Player_Shooting player = collision.GetComponent<Player_Shooting>();
+            player.Increase_Update(1);
             Destroy(gameObject);
         }
-        
     }
+
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

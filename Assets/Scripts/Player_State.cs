@@ -11,6 +11,8 @@ public class Player_State : MonoBehaviour
     [SerializeField] private Animator player_Animator;
     [SerializeField] private Shield shield;
 
+    private Player_Shooting player_Shooting;
+
     private float health;
     private bool canPlaye_Anim = true;
     void Start()
@@ -18,6 +20,7 @@ public class Player_State : MonoBehaviour
         health = maxHealth;
         fill_Image.fillAmount = health/maxHealth;
         End_Games_Manager.end_Games_Manager.gameOver = false;
+        player_Shooting = GetComponent<Player_Shooting>();  
     }
 
     public void Player_TakeDamage(float damage){
@@ -28,6 +31,7 @@ public class Player_State : MonoBehaviour
         health -= damage;
         Instantiate(Explosion_Prefab, transform.position, transform.rotation);
 
+        player_Shooting.Decrease_Update(1);
         if(canPlaye_Anim){
             player_Animator.SetTrigger("Damage");
             StartCoroutine(AntiSpamAnimation());
