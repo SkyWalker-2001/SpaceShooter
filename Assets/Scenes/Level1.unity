@@ -1314,7 +1314,7 @@ CompositeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929924464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1598,6 +1598,7 @@ MonoBehaviour:
   test: 1
   test_State: 0
   boss_Enters: {fileID: 929924471}
+  boss_Fire: {fileID: 929924473}
 --- !u!114 &929924473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1610,6 +1611,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2a4f6de839048986220f11d55d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  shoot_Rate: 1
+  bullet_Prefab: {fileID: 2923686349498308375, guid: 443a1dc219ccb3f498332fd60092fca5, type: 3}
+  shootPoint:
+  - {fileID: 978057481}
+  - {fileID: 1672037326}
+  - {fileID: 1069495356}
+  - {fileID: 183733782}
 --- !u!1 &937832765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,7 +1686,7 @@ Transform:
   m_GameObject: {fileID: 978057480}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.05, y: -0.44, z: 0}
+  m_LocalPosition: {x: -1.05, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1739,7 +1748,7 @@ Transform:
   m_GameObject: {fileID: 1069495355}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.05, y: -0.44, z: 0}
+  m_LocalPosition: {x: 1.05, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
