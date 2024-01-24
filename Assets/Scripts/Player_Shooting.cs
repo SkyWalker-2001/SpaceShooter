@@ -21,6 +21,8 @@ public class Player_Shooting : MonoBehaviour
     [SerializeField] private Transform LeftRotation_Canon;
     [SerializeField] private Transform RightRotation_Canon;
 
+    [SerializeField] private AudioSource audioSource;
+
     private int upgrade_Level = 0;
 
     private float interval_Reset;
