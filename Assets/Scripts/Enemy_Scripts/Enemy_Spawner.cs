@@ -15,6 +15,9 @@ public class Enemy_Spawner : MonoBehaviour
     [Space(15)]
     [SerializeField]private float enemySpawnTime;
 
+    [Header("Boss")]
+    [SerializeField] private GameObject bossPrefab;
+    [SerializeField] private Win_Condition winCondition;
 
     void Start()
     {
@@ -47,5 +50,16 @@ public class Enemy_Spawner : MonoBehaviour
 
     private void OnBecameInvisible() {
         Destroy(gameObject);
+    }
+    private void OnDisable()
+    {
+        if (winCondition.canSpawnBoss == false)
+            return;
+
+        if(bossPrefab != null)
+        {
+            Vector2 spawnPos = mainCam.ViewportToWorldPoint(new Vector2(0.5f, 1.2f));
+            Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+        }
     }
 }
