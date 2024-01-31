@@ -5,8 +5,10 @@ public class Interstitial_Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
 {
     [SerializeField] string _androidAdUnitId = "Interstitial_Android";
     [SerializeField] string _iOsAdUnitId = "Interstitial_iOS";
+    [SerializeField] private Banner_Ads _bannerAds;
     string _adUnitId;
 
+    [SerializeField] private int _time_to_skip = 1;
     
     void Awake()
     {
@@ -23,6 +25,19 @@ public class Interstitial_Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
 #elif UNITY_EDITOR
             _adUnitId = _androidAdUnitId;
 #endif
+
+        int skip_Number = PlayerPrefs.GetInt("Interstitial", _time_to_skip);
+        
+        if(skip_Number != 0)
+        {
+            skip_Number -= 1;
+            PlayerPrefs.SetInt("Interstitial", skip_Number);
+        }
+        else
+        {
+            LoadAd();
+            PlayerPrefs.SetInt("Interstitial", _time_to_skip);
+        }
 
         LoadAd();
 
@@ -64,6 +79,8 @@ public class Interstitial_Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
         Debug.Log($"Show Complete {placementId}");
+        Time.timeScale = 1;
+        _bannerAds.Load_BannerAd();
     }
 
     public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
@@ -74,6 +91,8 @@ public class Interstitial_Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
     public void OnUnityAdsShowStart(string placementId)
     {
         Debug.Log($"Show Start {placementId}");
+        Advertisement.Banner.Hide();
+        Time.timeScale = 0;
     }
 
 }
