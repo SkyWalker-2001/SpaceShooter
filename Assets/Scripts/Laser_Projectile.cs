@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Laser_Projectile : MonoBehaviour
 {
@@ -8,18 +9,41 @@ public class Laser_Projectile : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float damage;
 
-    void Start()
+    private ObjectPool<Laser_Projectile> reference_Pool;
+
+    void OnEnable()
     {
         rb.velocity = Vector2.up * speed;
+    }
+
+    private void OnDisable()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public void SetPool(ObjectPool<Laser_Projectile> pool)
+    {
+        reference_Pool = pool;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         Enemy enemy = other.GetComponent<Enemy>();
         enemy.Take_Damage(damage);
-        Destroy(gameObject);
+        if (gameObject.activeSelf)
+            reference_Pool.Release(this);
+        //Destroy(gameObject);
     }
 
-    private void OnBecameInvisible() {
-        Destroy(gameObject);
+    public void SetDirectionAndSpeed()
+    {
+        rb.velocity = Vector2.up * speed;
+
+    }
+
+    private void OnBecameInvisible()
+    {
+        if(gameObject.activeSelf)
+            reference_Pool.Release(this);
+        //Destroy(gameObject);
     }
 }

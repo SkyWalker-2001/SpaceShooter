@@ -2222,6 +2222,10 @@ PrefabInstance:
       propertyPath: fill_Image
       value: 
       objectReference: {fileID: 941712631}
+    - target: {fileID: 8887724143859887719, guid: 49f47f84784930148b2844720d9167b1, type: 3}
+      propertyPath: laser_Bullet_Prefab
+      value: 
+      objectReference: {fileID: 7385978960113060679, guid: ac9cf4b3afc043f40ad994539d050936, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
