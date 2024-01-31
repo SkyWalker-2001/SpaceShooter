@@ -53,7 +53,7 @@ public class Enemy_Spawner : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (winCondition.canSpawnBoss == false)
+        if (winCondition.canSpawnBoss == false) 
             return;
 
         if(bossPrefab != null)

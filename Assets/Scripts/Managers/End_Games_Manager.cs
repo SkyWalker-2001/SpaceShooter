@@ -11,9 +11,13 @@ public class End_Games_Manager : MonoBehaviour
 
     private Panel_Controller panel_Controller;
     private TextMeshProUGUI scoreTextMeshPro;
+    private Player_State player;
+    private Rewarded_Ad rewardedAd;
+    
     public bool gameOver;
+    public bool possibleWin;
 
-    private int Score;
+    public int Score;
 
     [HideInInspector]
     public string lvl_Unlock = "LevelUnlock";
@@ -30,25 +34,33 @@ public class End_Games_Manager : MonoBehaviour
         }
     }
 
-    private void Start() {
+    private void Start() 
+    {
         
     }
 
-    public void StartResolveSequence(){
+    public void StartResolveSequence()
+    {
         StopCoroutine(nameof(ResolveSequence));
         StartCoroutine(ResolveSequence());
     }
 
-    private IEnumerator ResolveSequence(){
-        yield return new WaitForSeconds(2);
+    private IEnumerator ResolveSequence()
+    {
+        yield return new WaitForSeconds(2.5f);
         ResolveGame();
     }
-    public void ResolveGame(){
-        if(gameOver == false)
+    public void ResolveGame()
+    {
+        if(possibleWin == true && gameOver == false)
         {
             Win_Game();
         }
-        else
+        else if(possibleWin == false && gameOver == true)
+        {
+            Ad_Lose_Game();
+        }
+        else if (possibleWin == true && gameOver == true)
         {
             Lose_Game();
         }
@@ -60,7 +72,10 @@ public class End_Games_Manager : MonoBehaviour
         scoreTextMeshPro.text = "Score: " + Score.ToString();
     }
 
-    public void Win_Game(){
+    public void Win_Game()
+    {
+        player.canTakeDamage = false;
+
         Set_Score();
         panel_Controller.Activate_Win_Screen_Panel();
 
@@ -76,6 +91,19 @@ public class End_Games_Manager : MonoBehaviour
         panel_Controller.Activate_Lose_Screen_Panel();
     }
 
+    public void Ad_Lose_Game()
+    {
+        Set_Score();
+        if(rewardedAd.adNumber > 0)
+        {
+            rewardedAd.adNumber -= 1;
+            panel_Controller.Activate_Ad_Lose_Screen_Panel();
+        }
+        else
+        {
+            panel_Controller.Activate_Lose_Screen_Panel();
+        }
+    }
     public void Set_Score()
     {
         PlayerPrefs.SetInt("Score" + SceneManager.GetActiveScene().name, Score);
@@ -95,5 +123,15 @@ public class End_Games_Manager : MonoBehaviour
     public void Register_Score_Text(TextMeshProUGUI score_TMP)
     {
         scoreTextMeshPro = score_TMP;
+    }
+
+    public void RegisterPlayerState(Player_State player_State)
+    {
+        player = player_State;
+    }
+
+    public void RegisterRewardedAd(Rewarded_Ad ad)
+    {
+        rewardedAd = ad;
     }
 }

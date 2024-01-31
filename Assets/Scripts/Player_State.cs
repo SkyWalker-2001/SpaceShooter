@@ -15,15 +15,38 @@ public class Player_State : MonoBehaviour
 
     private float health;
     private bool canPlaye_Anim = true;
-    void Start()
+
+    public bool canTakeDamage = true;
+
+    void OnEnable()
     {
         health = maxHealth;
         fill_Image.fillAmount = health/maxHealth;
         End_Games_Manager.end_Games_Manager.gameOver = false;
-        player_Shooting = GetComponent<Player_Shooting>();  
+
+        StartCoroutine(Damage_Protection());
     }
 
-    public void Player_TakeDamage(float damage){
+    private void Start()
+    {
+        player_Shooting = GetComponent<Player_Shooting>();
+
+        End_Games_Manager.end_Games_Manager.RegisterPlayerState(this);
+        
+        End_Games_Manager.end_Games_Manager.possibleWin = false;
+    }
+
+    IEnumerator Damage_Protection()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(1.5f);
+        canTakeDamage = true;
+    }
+
+    public void Player_TakeDamage(float damage)
+    {
+        if (canTakeDamage == false)
+            return;
 
         if (shield.protection)
             return;
@@ -44,7 +67,8 @@ public class Player_State : MonoBehaviour
             End_Games_Manager.end_Games_Manager.gameOver = true;
             End_Games_Manager.end_Games_Manager.StartResolveSequence();
             Instantiate(Explosion_Prefab, transform.position, transform.rotation);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

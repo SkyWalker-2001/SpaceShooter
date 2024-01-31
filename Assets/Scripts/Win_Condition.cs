@@ -23,6 +23,7 @@ public class Win_Condition : MonoBehaviour
 
             if (hasBoss == false)
             {
+                End_Games_Manager.end_Games_Manager.possibleWin = true;
                 End_Games_Manager.end_Games_Manager.StartResolveSequence();
             }
             else
